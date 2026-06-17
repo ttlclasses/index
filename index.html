@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TTL Computers - Online Classes</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg-main: #f8fafc;
+            --bg-card: #ffffff;
+            --bg-hero: #f1f5f9;
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-primary: #059669; /* Emerald Green */
+            --accent-hover: #047857;
+            --border-color: #e2e8f0;
+            
+            /* Category Accent Indicators */
+            --indicator-english: #0284c7;
+            --indicator-hindi: #ea580c;
+            --indicator-web: #059669;
+            --indicator-general: #6366f1;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .navbar-brand-simple {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            letter-spacing: -0.025em;
+        }
+
+        /* --- Advanced Navbar --- */
+        .navbar-simple {
+            background-color: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 0;
+            transition: all 0.3s ease;
+        }
+        .navbar-brand-simple {
+            color: var(--text-primary) !important;
+            font-weight: 800;
+            font-size: 1.35rem;
+        }
+        .nav-link-simple {
+            color: var(--text-secondary) !important;
+            font-size: 0.95rem;
+            font-weight: 600;
+            padding: 8px 16px !important;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        .nav-link-simple:hover {
+            color: var(--text-primary) !important;
+            background-color: #f1f5f9;
+        }
+
+        /* Animated Mobile Toggle Button */
+        .custom-toggler {
+            padding: 4px;
+            outline: none;
+            border: none;
+            background: transparent;
+        }
+        .custom-toggler:focus {
+            box-shadow: none;
+        }
+        .hamburger-icon {
+            width: 24px;
+            height: 18px;
+            position: relative;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .hamburger-icon span {
+            display: block;
+            position: absolute;
+            height: 2.5px;
+            width: 100%;
+            background: var(--text-primary);
+            border-radius: 9px;
+            opacity: 1;
+            left: 0;
+            transform: rotate(0deg);
+            transition: .25s ease-in-out;
+        }
+        .hamburger-icon span:nth-child(1) { top: 0px; }
+        .hamburger-icon span:nth-child(2) { top: 8px; }
+        .hamburger-icon span:nth-child(3) { top: 16px; }
+        
+        .custom-toggler:not(.collapsed) .hamburger-icon span:nth-child(1) {
+            top: 8px;
+            transform: rotate(135deg);
+        }
+        .custom-toggler:not(.collapsed) .hamburger-icon span:nth-child(2) {
+            opacity: 0;
+            left: -60px;
+        }
+        .custom-toggler:not(.collapsed) .hamburger-icon span:nth-child(3) {
+            top: 8px;
+            transform: rotate(-135deg);
+        }
+
+        /* Mobile Dropdown Refinements */
+        @media (max-width: 991.98px) {
+            .navbar-collapse {
+                background: var(--bg-card);
+                margin-top: 12px;
+                padding: 20px;
+                border-radius: 16px;
+                border: 1px solid var(--border-color);
+                box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            }
+            .nav-link-simple {
+                padding: 10px 14px !important;
+            }
+            .phone-btn {
+                width: 100%;
+                text-align: center;
+                margin-top: 8px;
+            }
+        }
+
+        /* --- Crisp Hero Section --- */
+        .header-simple {
+            background: linear-gradient(180deg, #f8fafc 0%, #f1f5f9 100%);
+            padding: 90px 0 90px 0;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+        }
+        .header-title {
+            font-weight: 800;
+            font-size: calc(2.2rem + 1.2vw); /* Responsive Typography */
+            color: var(--text-primary);
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+        .header-subtitle {
+            color: var(--text-secondary);
+            font-size: calc(1rem + 0.2vw);
+            max-width: 680px;
+            margin: 0 auto;
+        }
+
+        /* --- Premium Responsive Course Cards --- */
+        .course-card-simple {
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            background: var(--bg-card);
+            height: 100%;
+            overflow: hidden;
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+        .course-card-content {
+            padding: 32px 24px;
+        }
+        .course-card-simple:hover {
+            transform: translateY(-5px);
+            border-color: #cbd5e1;
+            box-shadow: 0 20px 30px -10px rgba(15, 23, 42, 0.08);
+        }
+        
+        .course-card-simple.english-card:hover { border-top: 6px solid var(--indicator-english); }
+        .course-card-simple.hindi-card:hover { border-top: 6px solid var(--indicator-hindi); }
+        .course-card-simple.web-card:hover { border-top: 6px solid var(--indicator-web); }
+        .course-card-simple.general-card:hover { border-top: 6px solid var(--indicator-general); }
+
+        .course-title {
+            font-weight: 700;
+            font-size: 1.25rem;
+            color: var(--text-primary);
+        }
+        .course-description {
+            font-size: 0.92rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        .course-emoji {
+            font-size: 2.2rem;
+            margin-bottom: 12px;
+            display: inline-block;
+        }
+
+        /* --- Clean Static Review Cards --- */
+        .review-card-simple {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            height: 100%;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .review-card-simple:hover {
+            transform: scale(1.01);
+            box-shadow: 0 12px 20px -5px rgba(15, 23, 42, 0.04);
+        }
+        
+        .review-card-simple.english { border-left: 5px solid var(--indicator-english); }
+        .review-card-simple.hindi { border-left: 5px solid var(--indicator-hindi); }
+        .review-card-simple.web { border-left: 5px solid var(--indicator-web); }
+        .review-card-simple.general { border-left: 5px solid var(--indicator-general); }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: #334155;
+            font-weight: 400;
+        }
+        .review-meta {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 14px;
+            font-weight: 600;
+        }
+        .stars-simple {
+            color: #d97706;
+            letter-spacing: 2px;
+            font-size: 0.85rem;
+            margin-bottom: 8px;
+        }
+
+        /* --- Mobile Layout Section Layout Utilities --- */
+        .section-padding {
+            padding: 80px 0;
+        }
+        @media (max-width: 767.98px) {
+            .section-padding {
+                padding: 50px 0;
+            }
+            /* Offset page bottom layout so content doesn't get hidden behind mobile sticky bar */
+            .pb-mobile-sticky {
+                padding-bottom: 80px !important;
+            }
+        }
+
+        /* --- Action Buttons --- */
+        .btn-simple-dark {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            border: none;
+            border-radius: 12px;
+            padding: 12px 24px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .btn-simple-dark:hover {
+            background-color: var(--accent-hover);
+            color: #ffffff;
+            transform: translateY(-1px);
+        }
+
+        .btn-simple-outline {
+            font-family: 'Inter', sans-serif;
+            background-color: transparent;
+            color: var(--text-primary);
+            border: 2px solid var(--text-primary);
+            border-radius: 12px;
+            padding: 10px 22px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+        }
+        .btn-simple-outline:hover {
+            background-color: var(--text-primary);
+            color: #ffffff;
+        }
+        .btn-simple-outline.phone-btn {
+            border-color: var(--accent-primary);
+            color: var(--accent-primary);
+        }
+        .btn-simple-outline.phone-btn:hover {
+            background-color: var(--accent-primary);
+            border-color: var(--accent-primary);
+            color: #ffffff;
+        }
+
+        /* --- Advanced Mobile Sticky Bottom Bar --- */
+        .mobile-sticky-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 1030;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-top: 1px solid var(--border-color);
+            padding: 12px 16px;
+            box-shadow: 0 -10px 30px rgba(15, 23, 42, 0.08);
+        }
+        .mobile-sticky-bar .btn {
+            padding: 12px 10px;
+            font-size: 0.9rem;
+            border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+        }
+
+        /* --- Footer --- */
+        .footer-simple {
+            background-color: var(--bg-card);
+            border-top: 1px solid var(--border-color);
+            padding: 60px 0;
+        }
+        .footer-heading {
+            font-weight: 700;
+            font-size: 1.6rem;
+        }
+    </style>
+</head>
+<body class="pb-mobile-sticky">
+
+    <nav class="navbar navbar-expand-lg navbar-simple sticky-top">
+        <div class="container">
+            <a class="navbar-brand navbar-brand-simple" href="#">💻 TTL Computers</a>
+            <button class="navbar-toggler custom-toggler collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto gap-2 gap-lg-4 align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link nav-link-simple" href="#reviews">Reviews</a></li>
+                    <li class="nav-item"><a class="nav-link nav-link-simple" href="#courses">Courses</a></li>
+                    <li class="nav-item">
+                        <a class="btn btn-simple-outline phone-btn text-decoration-none" href="tel:7411081276">
+                            Call 7411081276
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="reviews" class="section-padding bg-light">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-dark mb-2" style="font-size: 2rem;">Student Reviews</h2>
+                <p class="text-muted small">See what our successful graduates have to say about their learning experience.</p>
+            </div>
+            
+            <div class="row row-cols-1 row-cols-md-2 g-4">
+                
+                <div class="col">
+                    <div class="review-card-simple english">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"The Spoken English course completely changed my confidence level. The trainer was incredibly patient!"</p>
+                        <div class="review-meta">Rakshita M. &mdash; English Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple web">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"As a complete beginner, the HTML and CSS classes were so easy to follow. Highly recommend this for basic coding."</p>
+                        <div class="review-meta">Priya Sharma &mdash; Web Dev Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple hindi">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"Moving to North India for my job was stressful, but the Spoken Hindi classes helped me pick up everyday communication fast."</p>
+                        <div class="review-meta">Rohini &mdash; Hindi Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple web">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"I loved the real-world Bootstrap projects we built. The instructor clears every single doubt individually."</p>
+                        <div class="review-meta">Anjali Das &mdash; Web Dev Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple english">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"Very affordable pricing for the amount of practical value they offer. The timing options are perfect for working people."</p>
+                        <div class="review-meta">Sonali  &mdash; English Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple hindi">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"The conversational approach to Hindi made learning fun. It never felt like a boring lecture."</p>
+                        <div class="review-meta">Deepa N. &mdash; Hindi Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple web">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"Great structured roadmap for HTML/CSS. I am now confident enough to style my own basic responsive pages."</p>
+                        <div class="review-meta">JayaChaitra &mdash; Web Dev Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple english">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"I used to hesitate while speaking English in interviews, but the group mock-sessions gave me massive confidence."</p>
+                        <div class="review-meta">Sneha Patel &mdash; English Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple general">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"Excellent experience! The team is always approachable on the phone number provided whenever we face technical glitches."</p>
+                        <div class="review-meta">Nagaveni Kumar &mdash; General Student</div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="review-card-simple web">
+                        <div class="stars-simple">★★★★★</div>
+                        <p class="mb-0 review-text">"The best place to learn. The Bootstrap grids and flexbox classes were explained so simply."</p>
+                        <div class="review-meta">Meera J. &mdash; Web Dev Student</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <header class="header-simple text-center">
+        <div class="container px-4">
+            <h1 class="header-title mb-3">Upgrade your skills with TTL Computers.</h1>
+            <p class="header-subtitle mb-4">Live, online classes covering both language communication and core frontend responsive web engineering frameworks.</p>
+            <div class="d-flex justify-content-center">
+                <a href="https://forms.gle/gaGhkADBoqMCN8hR7" target="_blank" class="btn btn-simple-dark px-4 py-2.5 shadow-sm">Get Fee Details</a>
+            </div>
+        </div>
+    </header>
+
+    <section id="courses" class="section-padding">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="fw-bold text-dark" style="font-size: 2rem;">Our Programs</h2>
+                <div class="mx-auto bg-success mt-2" style="height: 3px; width: 50px; border-radius: 2px;"></div>
+            </div>
+            
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">
+                
+                <div class="col">
+                    <div class="course-card-simple english-card d-flex flex-column">
+                        <div class="course-card-content d-flex flex-column h-100">
+                            <div>
+                                <div class="course-emoji">🗣️</div>
+                                <h3 class="course-title mb-2">Spoken English</h3>
+                                <p class="course-description mb-4">Build communication confidence, refine sentence mechanics, and develop structured presentation tools using clear daily live drill routines.</p>
+                            </div>
+                            <a href="https://forms.gle/gaGhkADBoqMCN8hR7" target="_blank" class="btn btn-simple-dark w-100 mt-auto">Get Fee Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="course-card-simple hindi-card d-flex flex-column">
+                        <div class="course-card-content d-flex flex-column h-100">
+                            <div>
+                                <div class="course-emoji">🇮🇳</div>
+                                <h3 class="course-title mb-2">Spoken Hindi</h3>
+                                <p class="course-description mb-4">Master day-to-day functional conversational Hindi entirely from scratch. Form clear sentences quickly for career or relocation setups.</p>
+                            </div>
+                            <a href="https://forms.gle/gaGhkADBoqMCN8hR7" target="_blank" class="btn btn-simple-dark w-100 mt-auto">Get Fee Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="course-card-simple web-card d-flex flex-column">
+                        <div class="course-card-content d-flex flex-column h-100">
+                            <div>
+                                <div class="course-emoji">🌐</div>
+                                <h3 class="course-title mb-2">HTML, CSS &amp; Bootstrap</h3>
+                                <p class="course-description mb-4">Learn basic web layout standards. Assemble fluid grid frameworks, handle mobile responsiveness, and build layouts from scratch structural setups.</p>
+                            </div>
+                            <a href="https://forms.gle/gaGhkADBoqMCN8hR7" target="_blank" class="btn btn-simple-dark w-100 mt-auto">Get Fee Details</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col">
+                    <div class="course-card-simple general-card d-flex flex-column">
+                        <div class="course-card-content d-flex flex-column h-100">
+                            <div>
+                                <div class="course-emoji">💻</div>
+                                <h3 class="course-title mb-2">Basic Computers</h3>
+                                <p class="course-description mb-4">Get comfortable with essential computer operations. Learn operating system basics, file management, internet navigation, and key productivity software tools.</p>
+                            </div>
+                            <a href="https://forms.gle/gaGhkADBoqMCN8hR7" target="_blank" class="btn btn-simple-dark w-100 mt-auto">Get Fee Details</a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer-simple text-center">
+        <div class="container px-4">
+            <h4 class="footer-heading text-dark mb-3">Want to check pricing schedules?</h4>
+            <div class="mb-4">
+                <a href="https://forms.gle/gaGhkADBoqMCN8hR7" target="_blank" class="btn btn-simple-dark px-4">Request Fee Structure</a>
+            </div>
+            <p class="text-muted small mb-0">For any questions, reach out directly via call at <a href="tel:7411081276" class="text-dark fw-bold text-decoration-none">7411081276</a></p>
+            <hr class="my-4" style="border-color: var(--border-color);">
+            <small class="text-muted">&copy; 2026 TTL Computers. All rights reserved.</small>
+        </div>
+    </footer>
+
+    <div class="mobile-sticky-bar d-md-none">
+        <div class="row g-2">
+            <div class="col-5">
+                <a href="tel:7411081276" class="btn btn-simple-outline w-100 py-2.5">
+                    📞 Call Now
+                </a>
+            </div>
+            <div class="col-7">
+                <a href="https://forms.gle/gaGhkADBoqMCN8hR7" target="_blank" class="btn btn-simple-dark w-100 py-2.5">
+                    📩 Get Fee Details
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
